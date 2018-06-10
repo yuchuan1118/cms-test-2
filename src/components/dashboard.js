@@ -145,7 +145,12 @@ class Dashboard extends Component {
       return receipt.Total.RewardPoints;
     });
     // console.log(RewardPoints);
-    return _.sum(RewardPoints) / _.sum(RemainingPointsUsers);
+
+    if (_.sum(RemainingPointsUsers) === 0) {
+      return 0;
+    } else {
+      return _.sum(RewardPoints) / _.sum(RemainingPointsUsers);
+    }
   }
 
   renderCourse() {
