@@ -70,6 +70,84 @@ class Dashboard extends Component {
     return _.size(Users);
   }
 
+  renderPaymentUsers() {
+    const UserReceipts = this.props.receipts;
+
+    const PaymentUsers = _.map(UserReceipts, receipt => {
+      // for hasKey: true
+      if (receipt === true) {
+        console.log('error handling for hasKey: true.');
+        return 0;
+      }
+      // for Reciept without key: 'CashValue'
+      if (receipt.Total.CashValue === undefined) {
+        // console.log('CashValue = undefined');
+        return 0;
+      } else if (receipt.Total.CashValue === 0) {
+        // console.log('CashValue = 0');
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+    return _.sum(PaymentUsers);
+  }
+
+  renderRemainingPointsUsers() {
+    const UserReceipts = this.props.receipts;
+
+    const RemainingPointsUsers = _.map(UserReceipts, receipt => {
+      // for hasKey: true
+      if (receipt === true) {
+        console.log('error handling for hasKey: true.');
+        return 0;
+      }
+      // for Reciept without key: 'CashValue'
+      if (receipt.Total.RewardPoints === undefined) {
+        // console.log('RewardPoints = undefined');
+        return 0;
+      } else if (receipt.Total.RewardPoints === 0) {
+        // console.log('RewardPoints = 0');
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+    return _.sum(RemainingPointsUsers);
+  }
+
+  renderAvgRemainingPoints() {
+    const UserReceipts = this.props.receipts;
+
+    const RemainingPointsUsers = _.map(UserReceipts, receipt => {
+      // for hasKey: true
+      if (receipt === true) {
+        console.log('error handling for hasKey: true.');
+        return 0;
+      }
+      // for Reciept without key: 'CashValue'
+      if (receipt.Total.RewardPoints === undefined) {
+        // console.log('RewardPoints = undefined');
+        return 0;
+      } else if (receipt.Total.RewardPoints === 0) {
+        // console.log('RewardPoints = 0');
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+
+    const RewardPoints = _.map(UserReceipts, receipt => {
+      if (receipt === true) {
+        // for hasKey: true
+        return null;
+      }
+      return receipt.Total.RewardPoints;
+    });
+    // console.log(RewardPoints);
+    return _.sum(RewardPoints) / _.sum(RemainingPointsUsers);
+  }
+
   renderCourse() {
     return _.map(this.props.courses, course => {
       // console.log('course:', course);
@@ -96,7 +174,10 @@ class Dashboard extends Component {
         <h1>Comma,</h1>
         <h3>加值金額: {this.renderCashValue()} (NTD)</h3>
         <h3>剩餘點數: {this.renderRewardPoints()} (Points)</h3>
-        <h3>註冊人數: {this.renderUsers()}</h3>
+        <h3>註冊用戶: {this.renderUsers()}</h3>
+        <h3>付費用戶: {this.renderPaymentUsers()}</h3>
+        <h3>持點用戶: {this.renderRemainingPointsUsers()}</h3>
+        <h3>平均持點(持點用戶): {this.renderAvgRemainingPoints()}</h3>
         <table className="table table-hover">
           <thead>
             <tr>
