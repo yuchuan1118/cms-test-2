@@ -172,12 +172,39 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>Comma,</h1>
-        <h3>加值金額: {this.renderCashValue()} (NTD)</h3>
-        <h3>剩餘點數: {this.renderRewardPoints()} (Points)</h3>
-        <h3>註冊用戶: {this.renderUsers()}</h3>
-        <h3>付費用戶: {this.renderPaymentUsers()}</h3>
-        <h3>持點用戶: {this.renderRemainingPointsUsers()}</h3>
-        <h3>平均持點(持點用戶): {this.renderAvgRemainingPoints()}</h3>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>加值金額(NTD)</th>
+              <th>剩餘點數</th>
+              <th>註冊用戶</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>{this.renderCashValue()}</th>
+              <th>{this.renderRewardPoints()}</th>
+              <th>{this.renderUsers()}</th>
+            </tr>
+          </tbody>
+        </table>
+
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>付費用戶</th>
+              <th>持點用戶</th>
+              <th>平均持點</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>{this.renderPaymentUsers()}</th>
+              <th>{this.renderRemainingPointsUsers()}</th>
+              <th>{this.renderAvgRemainingPoints()}</th>
+            </tr>
+          </tbody>
+        </table>
         <table className="table table-hover">
           <thead>
             <tr>
