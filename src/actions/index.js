@@ -138,7 +138,7 @@ export function fetchReceipts() {
 export function fetchUsers() {
   return dispatch => {
     UsersRef.on('value', snapshot => {
-      console.log('fetchUsers');
+      console.log('fetchUsers,');
       dispatch({
         type: FETCH_USERS,
         payload: snapshot.val()
