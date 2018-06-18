@@ -24,7 +24,7 @@ class ReceiptList extends Component {
   }
 
   render() {
-    console.log(this.props.server_receipts);
+    // console.log(this.props.server_receipts);
     return (
       <table className="table table-hover">
         <thead>
