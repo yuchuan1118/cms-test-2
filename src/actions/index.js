@@ -3,8 +3,9 @@ export const CREATE_POST = 'create_post';
 export const FETCH_POST = 'fetch_post';
 export const DELETE_POST = 'delete_post';
 
-export const FETCH_RECEIPTS = 'fetch_receips';
+export const FETCH_RECEIPTS = 'fetch_receipts';
 export const FETCH_USERS = 'fetch_users';
+export const FETCH_SERVER_RECEIPTS = 'fetch_server_receipts';
 
 // firebase API
 // import Firebase from 'firebase';
@@ -23,6 +24,7 @@ const database = Firebase.database();
 // const AllCoursesRef = database.ref('posts/');
 const AllCoursesRef = database.ref('AllCourses/');
 const CashFlowRef = database.ref('CashFlow/');
+const ServerCashFlowRef = database.ref('ServerCashFlow/');
 const UsersRef = database.ref('Users/');
 
 export function fetchCourses() {
@@ -33,7 +35,7 @@ export function fetchCourses() {
   // };
   return dispatch => {
     AllCoursesRef.on('value', snapshot => {
-      console.log('fetchCourses');
+      console.log('ActionCreator: fetchCourses');
       // console.log('fetchCourses:', snapshot.val());
       dispatch({
         type: FETCH_COURSES,
@@ -76,7 +78,7 @@ export function fetchPost(id) {
   // };
   return dispatch => {
     AllCoursesRef.child(id).once('value', snapshot => {
-      console.log('fetchPost');
+      console.log('ActionCreator: fetchPost');
       // console.log('fetchPost:', snapshot.val());
       dispatch({
         type: FETCH_POST,
@@ -126,7 +128,7 @@ export function updatePost(id, values, callback) {
 export function fetchReceipts() {
   return dispatch => {
     CashFlowRef.on('value', snapshot => {
-      console.log('fetchReceipts');
+      console.log('ActionCreator: fetchReceipts');
       dispatch({
         type: FETCH_RECEIPTS,
         payload: snapshot.val()
@@ -138,9 +140,21 @@ export function fetchReceipts() {
 export function fetchUsers() {
   return dispatch => {
     UsersRef.on('value', snapshot => {
-      console.log('fetchUsers,');
+      console.log('ActionCreator: fetchUsers');
       dispatch({
         type: FETCH_USERS,
+        payload: snapshot.val()
+      });
+    });
+  };
+}
+
+export function fetchServerReceipts() {
+  return dispatch => {
+    ServerCashFlowRef.on('value', snapshot => {
+      console.log('ActionCreator: fetchServerReceipts');
+      dispatch({
+        type: FETCH_SERVER_RECEIPTS,
         payload: snapshot.val()
       });
     });

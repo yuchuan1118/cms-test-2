@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchReceipts, fetchUsers, fetchCourses } from '../actions';
 import _ from 'lodash';
+import ReceiptList from './receipt_list';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -10,10 +11,11 @@ class Dashboard extends Component {
     this.props.fetchCourses();
   }
   renderCashValue() {
+    // console.log('1.renderCashValue()');
     const UserReceipts = this.props.receipts;
     // console.log('UserReceipts:', UserReceipts);
 
-    // method1. SumCashValue By TotalRewardPoints
+    // method1. SumCashValue By TotalCashFlow
     const CashValue = _.map(UserReceipts, receipt => {
       // for hasKey: true
       if (receipt === true) {
@@ -26,8 +28,9 @@ class Dashboard extends Component {
       }
       return receipt.Total.CashValue;
     });
-    // console.log('CashValue:', CashValue);
-    const SumCashValueByTotalRewardPoints = _.sum(CashValue);
+    // console.log('TotalCashFlow:', CashValue);
+    const SumCashValueByTotalCashFlow = _.sum(CashValue);
+    // console.log('SumCashValueByTotalCashFlow:', SumCashValueByTotalCashFlow);
 
     // method2. SumCashValue By History
     // const UserReceipts = this.props.receipts;
@@ -39,19 +42,27 @@ class Dashboard extends Component {
         }
       });
     });
-    // Compare two value: if not equal, return error (something wrong!!!)
     const SumCashValueByHistory = _.sumBy(IAP_Historys, 'Value');
-    if (SumCashValueByTotalRewardPoints === SumCashValueByHistory) {
+    // console.log('SumCashValueByHistory:', SumCashValueByHistory);
+
+    // Compare two value: if not equal, return error (something wrong!!!)
+    if (SumCashValueByTotalCashFlow == SumCashValueByHistory) {
+      // console.log('if pass, LINE Notify!');
+      // if (!SumCashValueByTotalCashFlow && !SumCashValueByHistory) {
+      //   return 'N/A';
+      // }
+
       return SumCashValueByHistory;
     } else {
-      // console.log('CashValue: ByTotalRewardPoints =/= ByHistory');
-      // console.log('ByTotalRewardPoints:', SumCashValueByTotalRewardPoints);
+      // console.log('CashValue: ByTotalCashFlow =/= ByHistory');
+      // console.log('ByTotalCashFlow:', SumCashValueByTotalCashFlow);
       // console.log('ByHistory:', SumCashValueByHistory);
       return 'N/A';
     }
   }
 
   renderRewardPoints() {
+    // console.log('2.renderRewardPoints()');
     const UserReceipts = this.props.receipts;
     const RewardPoints = _.map(UserReceipts, receipt => {
       if (receipt === true) {
@@ -65,6 +76,7 @@ class Dashboard extends Component {
   }
 
   renderUsers() {
+    // console.log('3.renderUsers()');
     const Users = this.props.users;
     // console.log('Users:', Users);
     return _.size(Users);
@@ -210,6 +222,7 @@ class Dashboard extends Component {
             </tr>
           </tbody>
         </table>
+        <h3>課程列表</h3>
         <table className="table table-hover">
           <thead>
             <tr>
@@ -221,6 +234,8 @@ class Dashboard extends Component {
           </thead>
           <tbody>{this.renderCourse()}</tbody>
         </table>
+        <h3>交易紀錄</h3>
+        <ReceiptList />
       </div>
     );
   }
