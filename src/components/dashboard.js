@@ -51,7 +51,6 @@ class Dashboard extends Component {
       // if (!SumCashValueByTotalCashFlow && !SumCashValueByHistory) {
       //   return 'N/A';
       // }
-
       return SumCashValueByHistory;
     } else {
       // console.log('CashValue: ByTotalCashFlow =/= ByHistory');
