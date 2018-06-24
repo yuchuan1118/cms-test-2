@@ -17,8 +17,8 @@ import Firebase from 'firebase/app';
 import 'firebase/database'; // import 'firebase/<PACKAGE>';
 
 import FIREBASE_CONFIG from '../config/firebase';
-Firebase.initializeApp(FIREBASE_CONFIG.DEV);
-// Firebase.initializeApp(FIREBASE_CONFIG.PRODUCTION);
+// Firebase.initializeApp(FIREBASE_CONFIG.DEV);
+Firebase.initializeApp(FIREBASE_CONFIG.PRODUCTION);
 
 const database = Firebase.database();
 // const AllCoursesRef = database.ref('posts/');

@@ -9,18 +9,21 @@ class ReceiptList extends Component {
   }
 
   renderReceipts() {
-    return _.map(this.props.server_receipts, receipt => {
-      return (
-        <tr key={receipt.ReceiptId}>
-          <td>{receipt.Time}</td>
-          <td>{receipt.Uid}</td>
-          <td>{receipt.CashType}</td>
-          <td>
-            {receipt.Value} {receipt.Unit}{' '}
-          </td>
-        </tr>
-      );
-    });
+    const { server_receipts } = this.props;
+    return _.reverse(
+      _.map(server_receipts, (receipt, ReceiptUid) => {
+        return (
+          <tr key={ReceiptUid}>
+            <td>{receipt.Time}</td>
+            <td>{receipt.Uid}</td>
+            <td>{receipt.CashType}</td>
+            <td>
+              {receipt.Value} {receipt.Unit}{' '}
+            </td>
+          </tr>
+        );
+      })
+    );
   }
 
   receiptSyncCheck() {

@@ -172,6 +172,7 @@ class Dashboard extends Component {
         <tr key={course.courseId}>
           <td>{course.courseTitle}</td>
           <td>{course.studentNumber}</td>
+          <td>{course.studentNumber - course.couponExchange}</td>
           <td>{course.couponExchange}</td>
           <td>{course.couponLimit}</td>
         </tr>
@@ -228,7 +229,8 @@ class Dashboard extends Component {
             <tr>
               <th>課程名稱</th>
               <th>學生總數</th>
-              <th>兌換次數</th>
+              <th>購買堂數</th>
+              <th>兌換堂數</th>
               <th>兌換上限</th>
             </tr>
           </thead>
