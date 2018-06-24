@@ -20,6 +20,9 @@ import FIREBASE_CONFIG from '../config/firebase';
 // Firebase.initializeApp(FIREBASE_CONFIG.DEV);
 Firebase.initializeApp(FIREBASE_CONFIG.PRODUCTION);
 
+import LineNotify from '../components/line_notify';
+// LINE Notify with WebHooks
+
 const database = Firebase.database();
 // const AllCoursesRef = database.ref('posts/');
 const AllCoursesRef = database.ref('AllCourses/');
@@ -152,6 +155,7 @@ export function fetchUsers() {
 export function fetchServerReceipts() {
   return dispatch => {
     ServerCashFlowRef.on('value', snapshot => {
+      LineNotify(1, 2, 3);
       console.log('ActionCreator: fetchServerReceipts');
       dispatch({
         type: FETCH_SERVER_RECEIPTS,
