@@ -3,6 +3,7 @@ import axios from 'axios';
 const WEBHOOKS_ROOT_URL = 'https://maker.ifttt.com/trigger';
 const WEBHOOKS_API_KEY = 'd8QDPylHR0Lcutc4Uso8sI';
 const WEBHOOKS_EVENT_RECEIPTS = 'In-app-purchased';
+// const WEBHOOKS_EVENT_CMS = 'cms-event';
 // https://maker.ifttt.com/trigger/In-app-purchased/with/key/d8QDPylHR0Lcutc4Uso8sI
 
 // const request = axios
@@ -24,14 +25,9 @@ const WEBHOOKS_EVENT_RECEIPTS = 'In-app-purchased';
 export default function LineNotify(val1, val2, val3) {
   console.log('LineNotify is called:', val1, val2, val3);
   // 'https://maker.ifttt.com/trigger/In-app-purchased/with/key/d8QDPylHR0Lcutc4Uso8sI',
-  const request = axios
+  axios
     .post(
-      `${WEBHOOKS_ROOT_URL}/${WEBHOOKS_EVENT_RECEIPTS}/with/key/${WEBHOOKS_API_KEY}`,
-      {
-        value1: val1,
-        value2: val2,
-        value3: val3
-      }
+      `${WEBHOOKS_ROOT_URL}/${WEBHOOKS_EVENT_RECEIPTS}/with/key/${WEBHOOKS_API_KEY}?value1=${val1}&value2=${val2}&value3=${val3}`
     )
     .then(
       () => {
