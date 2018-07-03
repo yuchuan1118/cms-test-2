@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { fetchReceipts, fetchUsers, fetchCourses } from '../actions';
 import _ from 'lodash';
 import ReceiptList from './receipt_list';
+import RegisterList from './register_list';
+import Chart from './chart';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -189,7 +191,7 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>Comma,</h1>
-        <h3>關鍵指標</h3>
+        <h3>營運指標</h3>
         <table className="table table-hover">
           <thead>
             <tr>
@@ -219,10 +221,15 @@ class Dashboard extends Component {
             <tr>
               <th>{this.renderPaymentUsers()}</th>
               <th>{this.renderRemainingPointsUsers()}</th>
-              <th>{this.renderAvgRemainingPoints()}</th>
+              <th>{_.round(this.renderAvgRemainingPoints())}</th>
             </tr>
           </tbody>
         </table>
+
+        <div>
+          <h3>每日註冊</h3>
+          <RegisterList />
+        </div>
         <h3>課程列表</h3>
         <table className="table table-hover">
           <thead>
