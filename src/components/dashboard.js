@@ -9,6 +9,7 @@ import Chart from './chart';
 class Dashboard extends Component {
   componentDidMount() {
     this.props.fetchReceipts();
+    this.props.fetchReceipts();
     this.props.fetchUsers();
     this.props.fetchCourses();
   }
